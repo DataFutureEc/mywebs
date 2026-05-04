@@ -1,1 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DATAFUTURE | Soluciones tecnológicas con datos</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafcff;
+            color: #1e2a3e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* header / nav */
+        header {
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background: rgba(255,255,255,0.96);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #008080, #20B2AA);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #f05a9b;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c3e66;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #e67e22;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(120deg, #fef9e8 0%, #f4f9fc 100%);
+            padding: 3rem 0 2rem 0;
+            border-bottom: 1px solid #ffe0b5;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #008080, #FF5E9E, #F3B33D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #2d3a4b;
+            font-size: 1.1rem;
+        }
+
+        /* cards misión visión */
+        .mission-vision {
+            padding: 5rem 0 4rem;
+        }
+
+        .mv-grid {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .mv-card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.2s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .mv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.12);
+        }
+
+        .mv-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        /* iconos con colores variados: turquesa, fucsia, mostaza */
+        .mv-card:first-child .mv-icon {
+            color: #20B2AA; /* turquesa */
+        }
+        .mv-card:last-child .mv-icon {
+            color: #FF5E9E; /* fucsia */
+        }
+
+        .mv-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+        /* títulos misión y visión con colores definidos */
+        .mv-card:first-child h3 {
+            color: #008B8B;  /* turquesa fuerte */
+        }
+        .mv-card:last-child h3 {
+            color: #F05A9B;  /* fucsia */
+        }
+
+        .mv-card p {
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* sección productos y servicios */
+        .services {
+            background: #ffffff;
+            padding: 4rem 0 5rem;
+            border-radius: 3rem 3rem 0 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #008080, #FF4B8C, #F3B33D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fefefe;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            transition: all 0.2s;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            border-color: #ffe0b5;
+            box-shadow: 0 20px 30px -14px rgba(243, 179, 61, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .service-icon {
+            font-size: 2.2rem;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        /* asignación de colores cíclicos a los iconos de servicios: turquesa, fucsia, mostaza, y combinaciones */
+        .service-card:nth-child(1) .service-icon { background: #e0f3f0; color: #008080; }
+        .service-card:nth-child(2) .service-icon { background: #ffe4f0; color: #FF5E9E; }
+        .service-card:nth-child(3) .service-icon { background: #fff0dc; color: #E67E22; }
+        .service-card:nth-child(4) .service-icon { background: #e0f3f0; color: #20B2AA; }
+        .service-card:nth-child(5) .service-icon { background: #ffe4f0; color: #D43F7A; }
+        .service-card:nth-child(6) .service-icon { background: #fff0dc; color: #F3B33D; }
+        .service-card:nth-child(7) .service-icon { background: #e0eff5; color: #E67E22; }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        /* títulos de cada servicio con tonos: alternamos turquesa, fucsia, mostaza */
+        .service-card:nth-child(1) h3 { color: #008B8B; }
+        .service-card:nth-child(2) h3 { color: #DA3E7A; }
+        .service-card:nth-child(3) h3 { color: #E67E22; }
+        .service-card:nth-child(4) h3 { color: #1A9C9C; }
+        .service-card:nth-child(5) h3 { color: #C93A6B; }
+        .service-card:nth-child(6) h3 { color: #F3B33D; }
+        .service-card:nth-child(7) h3 { color: #E67E22; }
+
+        .service-card p {
+            color: #475569;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        /* footer */
+        .footer-cta {
+            background: #0a1c2f;
+            color: #cbd5e6;
+            padding: 3rem 0 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-text h3 {
+            color: white;
+            font-weight: 800;
+            background: linear-gradient(120deg, #20B2AA, #FF5E9E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            font-size: 1.6rem;
+        }
+        .footer-text p {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #F3B33D;
+        }
+
+        hr {
+            margin: 1.5rem 0 1rem;
+            border-color: #2a3f5e;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #8196b0;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-content h2 {
+                font-size: 1.9rem;
+            }
+            .mv-grid {
+                flex-direction: column;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1>DATAFUTURE<span>datos + futuro inteligente</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#mision-vision">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section class="hero" id="inicio">
+    <div class="container hero-content">
+        <h2>Datos que construyen el mañana<br>tecnología con visión de futuro</h2>
+        <p>En DATAFUTURE transformamos retos tecnológicos en soluciones ágiles, basadas en datos y con inteligencia de vanguardia.</p>
+    </div>
+</section>
+
+<!-- Misión y Visión -->
+<section id="mision-vision" class="mission-vision">
+    <div class="container">
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>MISIÓN</h3>
+                <p>Acercar la tecnología a las personas, empresas e instituciones mediante el uso de datos, sistemas y aplicaciones que les permitan afrontar diferentes retos que impiden o retrasan su desarrollo.</p>
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>VISIÓN</h3>
+                <p>Nuestra visión es ser líderes en el desarrollo de soluciones tecnológicas innovadoras que permitan utilizar los datos como herramienta para enfrentar los retos del futuro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTOS Y SERVICIOS (7 áreas) con nuevas paletas -->
+<section id="servicios" class="services">
+    <div class="container">
+        <div class="section-header">
+            <h2>Productos & Servicios</h2>
+            <p>Impulsamos tu transformación digital con soluciones a medida</p>
+        </div>
+        <div class="services-grid">
+            <!-- Desarrollo de Software -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>Desarrollo de Software</h3>
+                <p>Te ayudamos a modernizar tus procesos gracias al desarrollo de herramientas web que funcionan con internet. Integra tus sistemas o procesos actuales con nuevo software optimizando recursos y brindando valor adicional a tus clientes o usuarios.</p>
+            </div>
+            <!-- Ciencia de Datos e Inteligencia Artificial -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-brain"></i></div>
+                <h3>Ciencia de Datos e IA</h3>
+                <p>Te brindamos asesoría sobre el aprovechamiento de tus datos y el uso responsable de diferentes herramientas generadoras de soluciones basadas en Inteligencia Artificial.</p>
+            </div>
+            <!-- Investigaciones Estadísticas -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-chart-simple"></i></div>
+                <h3>Investigaciones Estadísticas</h3>
+                <p>Somos expertos en ejecución de operaciones estadísticas como encuestas, censos y registros, utilizando herramientas digitales que garantizan calidad y rapidez. Ponemos nuestro conocimiento a tu disposición para encontrar respuestas reales a tus dudas.</p>
+            </div>
+            <!-- GeoPortales -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>GeoPortales</h3>
+                <p>Con el desarrollo de Geo Portales web, aprovechamos de forma eficiente tu información geográfica o mapas para que los puedas gestionar y visualizar de manera innovadora, añadiendo más criterios a la toma de decisiones.</p>
+            </div>
+            <!-- Sistemas de Información Local -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-landmark"></i></div>
+                <h3>Sistemas de Información Local</h3>
+                <p>Servicio dirigido a Gobiernos Autónomos Descentralizados. Apoyamos a los GAD en el desarrollo de un portal web con el que modernizan su transparencia, rendición de cuentas, control social y acceso a la información pública territorial, facilitando decisiones y políticas públicas locales.</p>
+            </div>
+            <!-- Páginas Web -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-globe"></i></div>
+                <h3>Páginas Web</h3>
+                <p>Te acompañamos en la modernización de tu negocio u organización. Con diseño y despliegue de un sitio web, las oportunidades de alcance se multiplican, siendo el complemento perfecto de tus redes sociales.</p>
+            </div>
+            <!-- Tiendas en Línea -->
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-cart-shopping"></i></div>
+                <h3>Tiendas en Línea</h3>
+                <p>Te daremos un impulso en el proceso de digitalización de tu negocio. Con la ayuda de un sitio o aplicación web, podrás gestionar de forma eficiente la oferta de tus productos y servicios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer / contacto -->
+<footer class="footer-cta" id="contacto">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-text">
+                <h3>DATAFUTURE</h3>
+                <p><i class="fas fa-envelope"></i> hello@datafuture.ec <br>
+                <i class="fas fa-phone-alt"></i> +593 2 500 1234 <br>
+                <i class="fas fa-map-marker-alt"></i> Quito · Guayaquil · Cuenca</p>
+            </div>
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#mision-vision">Nosotros</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#">Política de datos</a>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright">
+            © 2025 DATAFUTURE — Acercando la tecnología al desarrollo. Todos los derechos reservados.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#" || targetId === "") return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
