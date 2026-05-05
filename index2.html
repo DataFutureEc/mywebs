@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DATAFUTURE | Soluciones Tecnológicas con Datos e IA</title>
+    <!-- Enlace al archivo CSS externo (según estructura solicitada) -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts para tipografía moderna y legible -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (gratuito, para íconos llamativos y vistosos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ESTILOS BASE COMPLEMENTARIOS (para garantizar la paleta y comportamiento,
+           aunque el archivo style.css externo existe, integramos también aquí estilos robustos
+           para que la página funcione incluso si el CSS externo está vacío; además se respeta
+           la estructura de directorios y los colores solicitados: blanco fondo, negro texto,
+           títulos en turquesa, fucsia y mostaza) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;  /* blanco puro */
+            color: #000000;             /* texto negro */
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Encabezado y navegación llamativa */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00b4d8 0%, #ff5a9e 50%, #ffc300 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #111;
+            transition: 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ff5a9e;
+            border-bottom: 2px solid #ffc300;
+            padding-bottom: 4px;
+        }
+
+        /* Botón CTA vibrante */
+        .btn-cta {
+            background: linear-gradient(95deg, #00b4d8, #ff5a9e);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,180,216,0.2);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255,90,158,0.3);
+            background: linear-gradient(95deg, #0096b8, #ff3f8a);
+        }
+
+        /* Hero section llamativa */
+        .hero {
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #00b4d8, #ff5a9e, #ffc300);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin: 0 auto 32px;
+            color: #2c3e44;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        /* Tarjetas de servicios (grid) */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 60px 0 30px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .title-accent {
+            background: linear-gradient(120deg, #00b4d8, #ff5a9e, #ffc300);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 40px;
+            margin: 40px 0 50px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 45px rgba(0,180,216,0.12);
+            border-color: #ffe0b5;
+        }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #f2f2f2;
+            display: block;
+        }
+
+        .card-content {
+            padding: 24px 24px 28px;
+        }
+
+        .service-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #00b4d8, #ff5a9e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .service-desc {
+            color: #1f2c30;
+            margin-top: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Sección Mision/Vision */
+        .mv-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #fbfbfb;
+            border-radius: 48px;
+            padding: 48px 32px;
+            margin: 60px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border: 1px solid #f0f0f0;
+        }
+
+        .mv-card {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .mv-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .mv-card p {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Contacto vistoso sin formulario */
+        .contact-section {
+            margin: 70px 0 50px;
+            padding: 48px 32px;
+            background: linear-gradient(145deg, #fff, #faf9fe);
+            border-radius: 56px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+            border: 1px solid #ffefd0;
+        }
+
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .contact-info {
+            flex: 2;
+        }
+
+        .contact-info h3 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffc300, #ff5a9e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 22px;
+            font-size: 1.05rem;
+        }
+
+        .contact-detail i {
+            font-size: 1.8rem;
+            color: #00b4d8;
+            width: 42px;
+            text-align: center;
+        }
+
+        .contact-detail a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .contact-detail a:hover {
+            color: #ff5a9e;
+        }
+
+        .contact-badge {
+            flex: 1;
+            text-align: center;
+        }
+
+        .glass-icon {
+            background: rgba(0,180,216,0.1);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .glass-icon i {
+            font-size: 48px;
+            color: #ff5a9e;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(37,211,102,0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 1px solid #ececec;
+            margin-top: 40px;
+            color: #4b5563;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Barra de navegación llamativa con logo -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <!-- logo.png asumido desde carpeta images -->
+            <img src="images/logo.png" alt="DATAFUTURE" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/400x100?text=DataFuture';">
+            <span class="logo-text">DATAFUTURE</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <a href="#contacto" class="btn-cta"><i class="fas fa-rocket"></i> Innovar ahora</a>
+    </nav>
+
+    <!-- Hero / Presentación -->
+    <section id="inicio">
+        <div class="hero">
+            <div class="hero-badge"><i class="fas fa-chart-line"></i> +15 años de experiencia tecnológica</div>
+            <h1>Transformamos datos en <br> decisiones del futuro</h1>
+            <p>Somos una empresa ecuatoriana fundada en 2026 por profesionales con más de 15 años de experiencia en el sector tecnológico y manejo de datos. Acercamos la tecnología a personas, empresas e instituciones.</p>
+            <a href="#servicios" class="btn-cta" style="background: linear-gradient(135deg, #ffc300, #ff5a9e);"><i class="fas fa-arrow-right"></i> Explorar servicios</a>
+        </div>
+    </section>
+
+    <!-- Misión y Visión con colores Turquesa/Fucsia/ Mostaza en títulos -->
+    <div id="nosotros">
+        <div class="mv-section">
+            <div class="mv-card">
+                <h3 style="color: #00b4d8;">✨ MISIÓN</h3>
+                <p>Acercar la tecnología a las personas, empresas e instituciones mediante el uso de datos, sistemas y aplicaciones que les permitan afrontar diferentes retos que impiden o retrasan su desarrollo.</p>
+            </div>
+            <div class="mv-card">
+                <h3 style="color: #ff5a9e;">🚀 VISIÓN</h3>
+                <p>Nuestra visión es ser líderes en el desarrollo de soluciones tecnológicas innovadoras que permitan utilizar los datos como herramienta para enfrentar los retos del futuro.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN SERVICIOS: 8 servicios con imágenes 16:9 -->
+    <section id="servicios">
+        <h2 class="section-title">Servicios <span class="title-accent">especializados</span> <i class="fas fa-cogs" style="color:#ffc300;"></i></h2>
+        <div class="services-grid">
+            <!-- Servicio 1: Desarrollo de Software -->
+            <div class="service-card">
+                <img src="images/servicio1.png" alt="Desarrollo de Software" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Software+Development'">
+                <div class="card-content">
+                    <div class="service-title">1.0 Desarrollo de Software</div>
+                    <div class="service-desc">¿Ningún SaaS se adapta a tu operación? Desarrollamos sistemas web y apps móviles a medida que automatizan tus procesos, protegen la privacidad de tus datos y crecen contigo — sin depender de terceros ni pagar licencias eternas.</div>
+                </div>
+            </div>
+            <!-- Servicio 2: Recolección y Análisis de Datos -->
+            <div class="service-card">
+                <img src="images/servicio2.png" alt="Recolección y Análisis de Datos" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Data+Analytics'">
+                <div class="card-content">
+                    <div class="service-title">2.0 Recolección y Análisis de Datos</div>
+                    <div class="service-desc">¿Tus decisiones aún dependen de la intuición? Te ayudamos a construir la infraestructura de datos que tu negocio necesita: desde sistemas de recolección hasta paneles BI, análisis exploratorio y geoportales.</div>
+                </div>
+            </div>
+            <!-- Servicio 3: Ciencia de Datos e IA Clásica -->
+            <div class="service-card">
+                <img src="images/servicio3.png" alt="Ciencia de Datos e IA" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Machine+Learning'">
+                <div class="card-content">
+                    <div class="service-title">3.0 Ciencia de Datos e IA Clásica</div>
+                    <div class="service-desc">¿Qué pasaría si pudieras predecir la demanda, detectar fraudes o segmentar tus clientes? Aplicamos modelos de Machine Learning sobre tus datos para decisiones más inteligentes y rentables.</div>
+                </div>
+            </div>
+            <!-- Servicio 4: Soluciones con IA Generativa -->
+            <div class="service-card">
+                <img src="images/servicio4.png" alt="IA Generativa" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Generative+AI'">
+                <div class="card-content">
+                    <div class="service-title">4.0 Soluciones con IA Generativa</div>
+                    <div class="service-desc">¿Cuántas horas pierde tu equipo en tareas repetitivas? Diseñamos soluciones con IA Generativa que automatizan procesos, conectan sistemas y orquestan agentes inteligentes.</div>
+                </div>
+            </div>
+            <!-- Servicio 5: Despliegue de prototipos hechos con IA -->
+            <div class="service-card">
+                <img src="images/servicio5.png" alt="Despliegue de prototipos IA" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Deploy+AI+Prototypes'">
+                <div class="card-content">
+                    <div class="service-title">5.0 Despliegue de prototipos hechos con IA</div>
+                    <div class="service-desc">¿Construiste una app con IA pero no sabes cómo publicarla de forma segura? Auditamos tu prototipo, corregimos vulnerabilidades y lo desplegamos en cloud robusta.</div>
+                </div>
+            </div>
+            <!-- Servicio 6: Formación en IA -->
+            <div class="service-card">
+                <img src="images/servicio6.png" alt="Formación en IA" class="card-img" onerror="this.src='https://placehold.co/640x360?text=AI+Training'">
+                <div class="card-content">
+                    <div class="service-title">6.0 Formación en IA</div>
+                    <div class="service-desc">La IA solo transforma tu negocio si tu equipo sabe usarla. Diseñamos talleres prácticos adaptados al nivel de cada grupo — desde directivos hasta equipos operativos.</div>
+                </div>
+            </div>
+            <!-- Servicio 7: Infraestructura Cloud -->
+            <div class="service-card">
+                <img src="images/servicio7.png" alt="Infraestructura Cloud" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Cloud+Infrastructure'">
+                <div class="card-content">
+                    <div class="service-title">7.0 Infraestructura Cloud</div>
+                    <div class="service-desc">¿Tu infraestructura actual frena el crecimiento? Te acompañamos en migración a AWS, GCP y Azure para sistemas más rápidos, seguros y económicos.</div>
+                </div>
+            </div>
+            <!-- Servicio 8: Asesoría para negocios digitales -->
+            <div class="service-card">
+                <img src="images/servicio8.png" alt="Asesoría Negocios Digitales" class="card-img" onerror="this.src='https://placehold.co/640x360?text=Digital+Business'">
+                <div class="card-content">
+                    <div class="service-title">8.0 Asesoría para negocios digitales</div>
+                    <div class="service-desc">¿Tienes una idea de negocio digital pero no sabes por dónde empezar? Te ayudamos a definir tu modelo, herramientas y presencia online para arrancar con estrategia clara.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto sin formulario, con elementos llamativos -->
+    <section id="contacto">
+        <div class="contact-section">
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <h3><i class="fas fa-paper-plane" style="color:#ffc300;"></i> Conversemos sobre tu próximo reto</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:datafuture.info@gmail.com">datafuture.info@gmail.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/593983282174" target="_blank">+593 98 328 2174</a>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Quito, Pomasqui, De los cafetos Lote 97 de Los Fresnos. (Vía a la mitad del mundo)</span>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a href="https://wa.me/593983282174?text=Hola%20DATAFUTURE,%20me%20interesa%20sus%20servicios%20de%20datos%20e%20IA" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Escríbenos por WhatsApp</a>
+                    </div>
+                </div>
+                <div class="contact-badge">
+                    <div class="glass-icon">
+                        <i class="fas fa-chalkboard-user"></i>
+                    </div>
+                    <p style="font-weight:600; background: linear-gradient(145deg, #ffc300, #f4a261); -webkit-background-clip: text; background-clip: text; color:transparent;">Innovación + Datos</p>
+                    <div style="margin-top: 15px;">
+                        <span style="background:#00b4d810; padding: 8px 16px; border-radius: 100px; font-size:0.8rem;"><i class="fas fa-clock"></i> Respuesta ágil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer con datos adicionales y elementos visuales -->
+    <footer>
+        <div class="footer-content">
+            <div style="display: flex; justify-content: center; gap: 28px; margin-bottom: 18px; flex-wrap:wrap;">
+                <span><i class="fas fa-database" style="color:#00b4d8"></i> Ciencia de Datos</span>
+                <span><i class="fas fa-microchip" style="color:#ff5a9e"></i> IA Generativa</span>
+                <span><i class="fas fa-cloud" style="color:#ffc300"></i> Cloud Solutions</span>
+            </div>
+            <p>© 2026 DATAFUTURE - Tecnología con propósito. <br> Fundada en Ecuador con visión global.</p>
+            <p style="margin-top: 12px; font-size: 0.8rem;"><i class="fas fa-map-pin"></i> Quito - Ecuador | Transformando datos en futuro</p>
+        </div>
+    </footer>
+</div>
+
+<!-- script opcional solo para interacciones sutiles (no formularios) y controles vistosos: efecto smooth en enlaces y pequeños detalles llamativos -->
+<script>
+    (function(){
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === "#" || targetId === "") return;
+                const targetElem = document.querySelector(targetId);
+                if(targetElem) {
+                    e.preventDefault();
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        // Añadir clase hover a los botones para feedback adicional, o pequeña animación en consola
+        console.log("DATAFUTURE | Landing Page interactiva, colores turquesa, fucsia y mostaza activos");
+        // Efecto sutil en tarjetas: resplandor dinámico opcional (puramente estético)
+        const cards = document.querySelectorAll('.service-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            });
+        });
+    })();
+</script>
+</body>
+</html>
