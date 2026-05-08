@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>TECIND - Orden de Trabajo Digital | Demo Taller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 20px;
+        }
+
+        /* Contenedor principal estilo tablet */
+        .tablet-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Header TECIND */
+        .header {
+            background: #0f3b2c;
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .order-id {
+            background: #facc15;
+            color: #1e293b;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* contenido */
+        .content {
+            padding: 24px;
+        }
+
+        /* field groups */
+        .field-group {
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+
+        .field-group h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0f3b2c;
+            border-left: 5px solid #facc15;
+            padding-left: 12px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .field {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: white;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0f3b2c;
+            box-shadow: 0 0 0 3px rgba(15,59,44,0.2);
+        }
+
+        .check-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .check-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            text-transform: none;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #0f3b2c;
+        }
+
+        /* tabla materiales */
+        .material-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f8fafc;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .material-table th, .material-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        .material-table th {
+            background: #e6f0ec;
+            font-weight: 600;
+        }
+        .btn-add {
+            margin-top: 12px;
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* fotos */
+        .fotos-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 12px;
+        }
+        .foto-card {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+            border: 1px dashed #94a3b8;
+        }
+        .foto-card button {
+            background: #0f3b2c;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .foto-preview {
+            width: 100%;
+            height: 100px;
+            background: #cbd5e1;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            font-size: 0.7rem;
+            overflow: hidden;
+        }
+        .foto-preview img {
+            max-width: 100%;
+            max-height: 100px;
+            object-fit: cover;
+        }
+
+        /* estados */
+        .estados {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .estado-boton {
+            padding: 10px 18px;
+            border-radius: 40px;
+            background: #f1f5f9;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .estado-boton.activo {
+            background: #0f3b2c;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .acciones {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+        .btn-primario {
+            background: #0f3b2c;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn-secundario {
+            background: #e2e8f0;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .tablet-container {
+                border-radius: 20px;
+            }
+            .content {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="tablet-container">
+    <div class="header">
+        <div class="logo">
+            <h1>⚡ TECIND</h1>
+            <p>Tecnología Electrónica Industrial</p>
+            <p style="font-size: 0.7rem;">Servicio Técnico Autorizado</p>
+        </div>
+        <div class="order-id">
+            OT # <span id="numeroOrden">240508-001</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- CLIENTE -->
+        <div class="field-group">
+            <h3>📋 DATOS DEL CLIENTE</h3>
+            <div class="row">
+                <div class="field">
+                    <label>Nombre / Empresa</label>
+                    <input type="text" id="clienteNombre" placeholder="GEOBINDU VARGAS" value="GEOBINDU VARGAS">
+                </div>
+                <div class="field">
+                    <label>Teléfono / Contacto</label>
+                    <input type="text" id="clienteContacto" placeholder="0994565152" value="0994565152">
+                </div>
+                <div class="field">
+                    <label>Correo electrónico</label>
+                    <input type="email" id="clienteEmail" placeholder="cliente@email.com" value="geobindu@ejemplo.com">
+                </div>
+            </div>
+        </div>
+
+        <!-- EQUIPO + ACCESORIOS -->
+        <div class="field-group">
+            <h3>🔧 EQUIPO Y ACCESORIOS</h3>
+            <div class="row">
+                <div class="field"><label>Tipo de Máquina</label><input type="text" id="maquina" placeholder="Ej: Soldadora / Motor / Generador" value="Soldadora Lincoln"></div>
+                <div class="field"><label>Marca</label><select id="marca"><option>Lincoln Electric</option><option>Miller</option><option>Otra</option></select></div>
+                <div class="field"><label>N° Serie</label><input type="text" id="serie" placeholder="Ingrese número de serie" value="LN-20983X"></div>
+            </div>
+            <div class="check-group">
+                <label><input type="checkbox" class="accesorio" value="Antorcha"> Antorcha</label>
+                <label><input type="checkbox" class="accesorio" value="Grapa de tierra"> Grapa de tierra</label>
+                <label><input type="checkbox" class="accesorio" value="Regulador"> Regulador</label>
+                <label><input type="checkbox" class="accesorio" value="Porta electrodo"> Porta electrodo</label>
+                <label><input type="checkbox" class="accesorio" value="Alambre MIG"> Alambre MIG</label>
+                <label><input type="checkbox" class="accesorio" value="Otros" id="checkOtros"> Otros: <input type="text" id="otrosAcc" style="width:100px; display:inline-block; margin-left:5px;"></label>
+            </div>
+            <div class="row" style="margin-top: 12px;">
+                <div class="field"><label>Tipo de Servicio</label><select id="tipoServicio"><option>Reparación</option><option>Instalación</option><option>Alquiler</option><option>Visita técnica</option></select></div>
+            </div>
+        </div>
+
+        <!-- DAÑO REPORTADO -->
+        <div class="field-group">
+            <h3>⚠️ DAÑO REPORTADO POR CLIENTE</h3>
+            <textarea rows="2" id="danoReportado" placeholder="Describe la falla que presenta el equipo...">Tarjeta explotada, no enciende, componente quemado en sector de potencia.</textarea>
+        </div>
+
+        <!-- FOTOS INGRESO -->
+        <div class="field-group">
+            <h3>📸 FOTOS DE INGRESO (antes de reparar)</h3>
+            <div class="fotos-row">
+                <div class="foto-card"><div class="foto-preview" id="preview1">📷 Vista general</div><button onclick="simularFoto(1)">Tomar foto 1</button></div>
+                <div class="foto-card"><div class="foto-preview" id="preview2">📷 Placa / Serie</div><button onclick="simularFoto(2)">Tomar foto 2</button></div>
+                <div class="foto-card"><div class="foto-preview" id="preview3">📷 Daño visible</div><button onclick="simularFoto(3)">Tomar foto 3</button></div>
+            </div>
+        </div>
+
+        <!-- MATERIALES -->
+        <div class="field-group">
+            <h3>🧾 MATERIALES UTILIZADOS</h3>
+            <table class="material-table" id="tablaMateriales">
+                <thead><tr><th>Cantidad</th><th>Descripción / Código</th><th>Precio Unitario</th><th></th></tr></thead>
+                <tbody>
+                    <tr><td><input type="text" value="4" style="width:70px"></td><td><input type="text" value="CAPACITOR 1200uF 200V"></td><td><input type="text" value="$4.50" style="width:80px"></td><td><button onclick="this.closest('tr').remove()">❌</button></td></tr>
+                    <tr><td><input type="text" value="1" style="width:70px"></td><td><input type="text" value="NTC 100Ω 20"></td><td><input type="text" value="$1.20" style="width:80px"></td><td><button onclick="this.closest('tr').remove()">❌</button></td></tr>
+                    <tr><td><input type="text" value="1" style="width:70px"></td><td><input type="text" value="LM393 Comparador"></td><td><input type="text" value="$3.00" style="width:80px"></td><td><button onclick="this.closest('tr').remove()">❌</button></td></tr>
+                </tbody>
+            </table>
+            <button class="btn-add" onclick="agregarMaterial()">+ Agregar material</button>
+        </div>
+
+        <!-- DESCRIPCIÓN REPARACIÓN -->
+        <div class="field-group">
+            <h3>🛠️ DESCRIPCIÓN DE LA REPARACIÓN (trabajo realizado)</h3>
+            <textarea rows="3" id="descReparacion">Se reemplazaron capacitores de potencia, se reparó pista quemada en tarjeta principal y se cambiaron componentes de control. Se realizaron pruebas de carga.</textarea>
+        </div>
+
+        <!-- OBSERVACIONES + BODEGAJE -->
+        <div class="field-group">
+            <h3>📌 OBSERVACIONES</h3>
+            <textarea rows="2" id="observaciones">Tarjeta venía explotada en sector de excitación. Se requiere supervisión en entrega.</textarea>
+            <label style="margin-top:12px; display:flex; gap:10px;"><input type="checkbox" id="bodegajeCheck"> Aplicar bodegaje (60 días sin retiro → cargo adicional)</label>
+        </div>
+
+        <!-- FOTOS FINALES -->
+        <div class="field-group">
+            <h3>📸 EQUIPO REPARADO (fotos finales)</h3>
+            <div class="fotos-row">
+                <div class="foto-card"><div class="foto-preview" id="previewFin1">📷 Equipo reparado</div><button onclick="simularFotoFin(1)">Tomar foto final 1</button></div>
+                <div class="foto-card"><div class="foto-preview" id="previewFin2">📷 Prueba funcionando</div><button onclick="simularFotoFin(2)">Tomar foto final 2</button></div>
+            </div>
+        </div>
+
+        <!-- ESTADO DE LA ORDEN (taller) -->
+        <div class="field-group">
+            <h3>🔄 ESTADO ACTUAL</h3>
+            <div class="estados" id="botonesEstado">
+                <button class="estado-boton" data-estado="Pendiente">Pendiente</button>
+                <button class="estado-boton" data-estado="Diagnóstico">Diagnóstico</button>
+                <button class="estado-boton" data-estado="Presupuestado">Presupuestado</button>
+                <button class="estado-boton" data-estado="En reparación">En reparación</button>
+                <button class="estado-boton" data-estado="Reparado">Reparado</button>
+                <button class="estado-boton" data-estado="Entregado">Entregado</button>
+            </div>
+            <p style="font-size:0.8rem; margin-top:8px; background:#fef9e3; padding:6px; border-radius:12px;">✅ Simulación: Al cambiar el estado, se enviaría correo al cliente (demo visual)</p>
+        </div>
+
+        <!-- ACCIONES FINALES -->
+        <div class="acciones">
+            <button class="btn-secundario" onclick="alert('Borrador guardado localmente (simulación)')">Guardar borrador</button>
+            <button class="btn-primario" onclick="simularGuardarOrden()">✅ Guardar orden y enviar notificaciones</button>
+        </div>
+        <p style="font-size:0.7rem; text-align:center; margin-top:24px; color:#475569;">Demo interactiva - Orden de Trabajo Tecind | Fase 1 - Tablet + Oficina</p>
+    </div>
+</div>
+
+<script>
+    // Estado activo en los botones
+    let estadoActual = "Pendiente";
+    const estadoBtns = document.querySelectorAll('.estado-boton');
+    estadoBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            estadoBtns.forEach(b => b.classList.remove('activo'));
+            this.classList.add('activo');
+            estadoActual = this.getAttribute('data-estado');
+            document.getElementById('estadoActualDisplay').innerText = estadoActual;
+            mostrarNotificacionDemo(`Estado cambiado a: ${estadoActual} (simulación de correo enviado al cliente)`);
+        });
+    });
+    // activar pendiente por defecto
+    document.querySelector('.estado-boton[data-estado="Pendiente"]').classList.add('activo');
+
+    // funciones simulacion fotos (demo)
+    function simularFoto(num) {
+        const colores = ['#a7f3d0', '#fed7aa', '#bfdbfe'];
+        const textos = ['📸 Vista general simulada', '🔢 Placa serie simulada', '🔥 Daño visible simulado'];
+        const preview = document.getElementById(`preview${num}`);
+        preview.innerHTML = `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='${colores[num-1].replace('#','%23')}'%3E%3Crect width='100%25' height='100%25'/%3E%3Ctext x='10' y='16' font-size='8' fill='black'%3E${textos[num-1]}%3C/text%3E%3C/svg%3E" style="width:100%; height:100%; object-fit:cover;">`;
+        mostrarNotificacionDemo(`Foto de ingreso ${num} capturada (demo)`);
+    }
+    function simularFotoFin(num) {
+        const preview = document.getElementById(`previewFin${num}`);
+        preview.innerHTML = `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%23cbd5e1'%3E%3Crect width='100%25' height='100%25'/%3E%3Ctext x='5' y='16' font-size='8' fill='black'%3E✅ Equipo reparado (demo)%3C/text%3E%3C/svg%3E" style="width:100%; height:100%; object-fit:cover;">`;
+        mostrarNotificacionDemo(`Foto final ${num} agregada - evidencia de reparación`);
+    }
+
+    function agregarMaterial() {
+        const tbody = document.querySelector('#tablaMateriales tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `<td><input type="text" placeholder="1" style="width:70px"></td>
+                            <td><input type="text" placeholder="Descripción"></td>
+                            <td><input type="text" placeholder="$0.00" style="width:80px"></td>
+                            <td><button onclick="this.closest('tr').remove()">❌</button></td>`;
+        tbody.appendChild(newRow);
+    }
+
+    function mostrarNotificacionDemo(mensaje) {
+        let notif = document.createElement('div');
+        notif.innerText = mensaje;
+        notif.style.position = 'fixed';
+        notif.style.bottom = '20px';
+        notif.style.right = '20px';
+        notif.style.backgroundColor = '#0f3b2c';
+        notif.style.color = 'white';
+        notif.style.padding = '12px 18px';
+        notif.style.borderRadius = '40px';
+        notif.style.fontSize = '0.8rem';
+        notif.style.zIndex = '999';
+        notif.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 3000);
+    }
+
+    function simularGuardarOrden() {
+        const cliente = document.getElementById('clienteNombre').value;
+        const email = document.getElementById('clienteEmail').value;
+        const ordenNum = document.getElementById('numeroOrden').innerText;
+        const estado = estadoActual;
+
+        let mensajeCorreo = `📧 SIMULACIÓN DE ENVÍO DE CORREO A: ${email}\n`;
+        mensajeCorreo += `Asunto: Actualización de su orden ${ordenNum} - TECIND\n`;
+        mensajeCorreo += `Estimado ${cliente}, su orden se encuentra en estado: ${estado}. Puede consultar el avance en nuestro portal.`;
+
+        alert(`✅ ORDEN GUARDADA (simulación)\n\n${mensajeCorreo}\n\n📸 Se almacenaron fotos de ingreso y salida.\n📄 La orden quedó registrada en la base de datos (PostgreSQL + S3 simulado).`);
+        mostrarNotificacionDemo(`Orden guardada. Cliente notificado por correo (estado: ${estado})`);
+    }
+
+    // Añadir un pequeño texto de estado visible
+    const estadoTextSpan = document.createElement('p');
+    estadoTextSpan.id = "estadoActualDisplay";
+    estadoTextSpan.style.fontWeight = 'bold';
+    estadoTextSpan.style.marginTop = '10px';
+    document.querySelector('.estados').after(estadoTextSpan);
+    estadoTextSpan.innerText = "Estado actual: Pendiente";
+    // actualizar display cuando se cambie estado
+    const originalEstado = document.querySelectorAll('.estado-boton');
+    originalEstado.forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.getElementById('estadoActualDisplay').innerText = `Estado actual: ${this.getAttribute('data-estado')}`;
+        });
+    });
+</script>
+</body>
+</html>
